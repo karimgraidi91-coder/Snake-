@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "000000000000",
+    "project_id": "snake_battle_placeholder",
+    "storage_bucket": ""
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:placeholder",
+        "android_client_info": {
+          "package_name": "com.karim971210.snake_battle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [ { "current_key": "PLACEHOLDER_API_KEY" } ],
+      "services": {
+        "analytics_service": {
+          "status": "ENABLED"
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:placeholder-admob",
+        "android_client_info": {
+          "package_name": "com.karim971210.snake_battle.admob"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [ { "current_key": "PLACEHOLDER_API_KEY" } ],
+      "services": {
+        "analytics_service": {
+          "status": "ENABLED"
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,56 @@
+name: snake_battle
+description: "A modern Snake game with battle royale features."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  
+  # Audio and Vibration
+  audioplayers: ^6.0.0
+  vibration: ^3.1.8
+  
+  # Google Mobile Ads is native-only; web keeps the in-app fallback slot.
+  google_mobile_ads: ^6.0.0
+  
+  # Ads - Yandex (removed temporarily to allow debug build)
+  # yandex_mobile_ads: ^2.1.0
+  
+  # Other dependencies
+  shared_preferences: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/audio/
+    - assets/images/
+    - assets/background/
+    - assets/icon.png
+
+  fonts:
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic[wdth,wght].ttf
+          weight: 400
+          style: normal
+
+# Configuration for flutter_launcher_icons
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/icon.png"

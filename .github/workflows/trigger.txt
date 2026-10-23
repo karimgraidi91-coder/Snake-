@@ -1,0 +1,2 @@
+Trigger file for GitHub Actions Android build
+Timestamp: 2026-05-21T19:10:00Z

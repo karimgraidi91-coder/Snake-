@@ -1,0 +1,102 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+*.iml
+*.lock
+
+# Gradle
+android/local.properties
+android/.gradle/
+android/build/
+android/app/debug/
+android/app/profile/
+android/app/release/
+!android/app/src/
+!android/app/build.gradle
+
+# iOS
+ios/.symlinks/
+ios/.generated/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Podfile.lock
+ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+ios/Runner.xcworkspace/xcuserdata/
+
+# Web
+web/canvaskit/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.apk
+*.aab
+*.ipa
+*.app
+*.deb
+*.dmg
+*.exe
+*.msi
+*.zip
+*.tar.gz
+
+# Keystore files
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# Sensitive files
+.env
+.env.local
+local.properties
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+__pycache__/
+*.pyc
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+.~
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+
+# npm and yarn
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Misc
+.ruby-version
+.ruby-gemset
+
+# Generated files from protobuf
+lib/generated/

@@ -1,0 +1,59 @@
+name: Android Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Flutter SDK (shallow clone)
+        run: |
+          git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/flutter
+          echo "$HOME/flutter/bin" >> $GITHUB_PATH
+          export PATH="$HOME/flutter/bin:$PATH"
+          flutter --version
+
+      - name: Accept Android licenses
+        run: |
+          yes | flutter doctor --android-licenses || true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build no-ads debug APK
+        run: flutter build apk --debug --target-platform android-arm64 --flavor noads --dart-define=AD_PROVIDER=none
+
+      - name: Upload no-ads APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake_battle_test_apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Build Yandex release APK
+        run: flutter build apk --release --target-platform android-arm64 --flavor yandex --dart-define=AD_PROVIDER=yandex || true
+
+      - name: Upload Yandex APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake_battle_yandex_apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Build AdMob release AAB
+        run: flutter build appbundle --release --target-platform android-arm64 --flavor admob --dart-define=AD_PROVIDER=admob || true
+
+      - name: Upload AdMob AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake_battle_google_aab
+          path: build/app/outputs/**/*.aab

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Snake Battle</string>
+    
+    <!-- Google AdMob IDs -->
+    <string name="google_app_id">ca-app-pub-1727125738804934~9540663885</string>
+    <string name="banner_ad_unit_id">ca-app-pub-1727125738804934/5814390450</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-1727125738804934/4808430540</string>
+    <string name="rewarded_ad_unit_id">ca-app-pub-1727125738804934/2448641921</string>
+    <string name="native_ad_unit_id">ca-app-pub-1727125738804934/6878841524</string>
+    <string name="app_open_ad_unit_id">ca-app-pub-1727125738804934/8191923192</string>
+    
+    <!-- Yandex Mobile Ads IDs -->
+    <string name="yandex_app_id">269350095</string>
+</resources>

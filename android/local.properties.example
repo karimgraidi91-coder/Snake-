@@ -1,0 +1,18 @@
+# This file is automatically created by Android Studio.
+# Do not modify this file -- YOUR CHANGES WILL BE ERASED!
+#
+# This file should be checked into version control.
+
+# Flutter SDK location
+# Change this to your Flutter SDK path
+flutter.sdk=/path/to/flutter
+
+# Android SDK location (usually set by Android Studio)
+# sdk.dir=/path/to/android/sdk
+
+# Uncomment this for 64 bit project only
+org.gradle.jvmargs=-Xmx4096m
+
+# Build features
+android.useAndroidX=true
+android.enableJetifier=true

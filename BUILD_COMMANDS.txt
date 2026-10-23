@@ -1,0 +1,294 @@
+# Build Commands for Three Versions of Snake Battle
+
+## Prerequisites
+```
+flutter clean
+flutter pub get
+```
+
+---
+
+## Version 1: APK Debug (No Ads) - Testing Build
+
+**Command:**
+```bash
+flutter build apk --flavor debug --debug --target-platform android-arm64 --split-per-abi
+```
+
+**Output:**
+```
+build/app/outputs/flutter-apk/app-debug.apk
+```
+
+**Description:**
+- Pure game code without any advertisements
+- ARM64 architecture for most modern Android devices
+- Debug build for testing and development
+- Fastest compilation time
+- No optimization applied
+
+**Install on Device:**
+```bash
+adb install build/app/outputs/flutter-apk/app-debug.apk
+```
+
+---
+
+## Version 2: APK Release (Yandex Ads)
+
+**Command:**
+```bash
+flutter build apk --flavor yandex --release --target-platform android-arm64 --split-per-abi
+```
+
+**Output:**
+```
+build/app/outputs/flutter-apk/app-yandex-release.apk
+```
+
+**Description:**
+- Integrated Yandex Mobile Ads
+- Banner ads appear at bottom of screen during gameplay
+- Interstitial ads show when player loses (Game Over)
+- Rewarded video ads for bonus points (optional)
+- Release build with code optimization
+- Smaller file size than debug build
+- Suitable for distribution on Yandex.Kassa or other Russian app stores
+
+**Ad Unit IDs Configured:**
+- App ID: 269350095
+- Banner Ad Unit: 240845807
+- Interstitial Ad Unit: 240845808
+- Rewarded Ad Unit: 240845809
+
+**Install on Device:**
+```bash
+adb install build/app/outputs/flutter-apk/app-yandex-release.apk
+```
+
+---
+
+## Version 3: AAB Release (Google AdMob - Google Play)
+
+**Command:**
+```bash
+flutter build appbundle --flavor admob --release --target-platform android-arm64
+```
+
+**Output:**
+```
+build/app/outputs/bundle/admobRelease/app-admob-release.aab
+```
+
+**Description:**
+- Integrated Google Mobile Ads (AdMob)
+- Multiple ad formats supported:
+  - Banner Ads (bottom of screen)
+  - Interstitial Ads (Game Over)
+  - Rewarded Video Ads (bonus points)
+  - Native Ads (optional)
+  - App Open Ads (on app launch)
+- App Bundle format optimized for Google Play Store
+- Smaller downloads for end users (dynamic feature delivery)
+- Release build with maximum optimization
+- Code obfuscation with ProGuard
+- Requires signing with production keystore
+
+**Ad Unit IDs Configured:**
+- App ID: ca-app-pub-1727125738804934~9540663885
+- Banner Ad Unit: ca-app-pub-1727125738804934/5814390450
+- Interstitial Ad Unit: ca-app-pub-1727125738804934/4808430540
+- Rewarded Ad Unit: ca-app-pub-1727125738804934/2448641921
+- Native Ad Unit: ca-app-pub-1727125738804934/6878841524
+- App Open Ad Unit: ca-app-pub-1727125738804934/8191923192
+
+**Required File:**
+- `app-ads.txt` (in project root):
+  ```
+  google.com, pub-1727125738804934, DIRECT, f08c47fec0942fa0
+  ```
+
+**Upload to Google Play:**
+1. Go to Google Play Console
+2. Create or select your app
+3. Go to Release > Production
+4. Upload the AAB file
+5. Add store listing information
+6. Submit for review
+
+---
+
+## Build Script (All Versions at Once)
+
+**Using the automated script:**
+```bash
+chmod +x build_all_versions.sh
+./build_all_versions.sh
+```
+
+This script will:
+1. Clean previous builds
+2. Fetch dependencies
+3. Build all three versions
+4. Display summary with file sizes
+5. Show next steps
+
+---
+
+## Advanced Build Options
+
+### Split APKs by Architecture (Multiple APKs)
+```bash
+# For Version 1 (Debug)
+flutter build apk --flavor debug --debug --split-per-abi
+
+# For Version 2 (Yandex)
+flutter build apk --flavor yandex --release --split-per-abi
+
+# For Version 3 (AdMob) - Use AAB instead
+flutter build appbundle --flavor admob --release
+```
+
+### Universal APK (Single APK for all architectures)
+```bash
+# For Version 1 (Debug)
+flutter build apk --flavor debug --debug
+
+# For Version 2 (Yandex)
+flutter build apk --flavor yandex --release
+
+# For Version 3 (AdMob) - Not recommended
+flutter build apk --flavor admob --release
+```
+
+### Build with Custom Version Code/Name
+```bash
+flutter build apk \
+  --flavor yandex \
+  --release \
+  --build-number=2 \
+  --build-name=1.0.1
+```
+
+---
+
+## Testing Builds
+
+### Verify APK Signature
+```bash
+jarsigner -verify build/app/outputs/flutter-apk/app-yandex-release.apk
+```
+
+### Check APK Contents
+```bash
+aapt dump badging build/app/outputs/flutter-apk/app-debug.apk
+```
+
+### Test on Emulator
+```bash
+# List available emulators
+emulator -list-avds
+
+# Start emulator
+emulator -avd <emulator_name>
+
+# Install APK
+adb install build/app/outputs/flutter-apk/app-debug.apk
+
+# Launch app
+adb shell am start -n com.karim971210.snake_battle.debug/com.karim971210.snake_battle.MainActivity
+```
+
+---
+
+## Troubleshooting
+
+### Build Fails - Dependency Issues
+```bash
+flutter clean
+flutter pub get
+flutter pub cache clean --expired
+```
+
+### Gradle Sync Issues
+```bash
+cd android
+./gradlew clean build
+cd ..
+```
+
+### Memory Issues During Build
+```bash
+# Increase Gradle memory
+export GRADLE_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
+```
+
+### Android SDK Issues
+```bash
+flutter doctor
+flutter doctor -v
+```
+
+---
+
+## File Sizes (Approximate)
+
+| Version | Build Type | Format | Size |
+|---------|-----------|--------|------|
+| Debug (No Ads) | Debug | APK | ~30-40 MB |
+| Yandex Ads | Release | APK | ~25-35 MB |
+| Google AdMob | Release | AAB | ~22-28 MB |
+
+*Actual sizes depend on included assets and library versions*
+
+---
+
+## Next Steps
+
+1. **Version 1 (Debug APK)**: Test on your device
+   ```bash
+   adb install build/app/outputs/flutter-apk/app-debug.apk
+   ```
+
+2. **Version 2 (Yandex APK)**: Distribute via Yandex Store
+   - Upload to Yandex.Kassa developer account
+   - Configure Yandex Ads settings
+   - Submit for review
+
+3. **Version 3 (Google AdMob AAB)**: Submit to Google Play
+   - Upload to Google Play Console
+   - Configure app listing
+   - Set pricing and distribution
+   - Submit for review
+
+---
+
+## Build Flavors Configuration
+
+All build flavors are configured in `android/app/build.gradle`:
+
+```gradle
+flavorDimensions "version"
+
+productFlavors {
+    debug {
+        // No ads - testing
+    }
+    yandex {
+        // Yandex Mobile Ads
+    }
+    admob {
+        // Google Mobile Ads
+    }
+}
+```
+
+Each flavor has its own:
+- Application ID suffix
+- Version name suffix
+- Build config variables
+- Resource strings
+
+---
+
+For detailed information, see `BUILD_GUIDE.md`

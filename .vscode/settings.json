@@ -1,0 +1,14 @@
+{
+  "dart.analysisExcludedFolders": [
+    "flutter",
+    "build",
+    ".dart_tool",
+    ".metadata"
+  ],
+  "files.exclude": {
+    "flutter": true,
+    "build": true,
+    ".dart_tool": true,
+    ".metadata": true
+  }
+}
